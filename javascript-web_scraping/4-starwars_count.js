@@ -1,25 +1,27 @@
 #!/usr/bin/node
-//write a script to print the number of apparition of Wedge ANtille
+//write a script to print the number of apparition of Wedge Antille
 //in Star Wars movies.
 
 const request = require ('request')
 const url = process.argv[2];
 
-request.get(`${url}`, (err, res, body) => {
+request(url, (err, res, body) => {
   if (err){
     console.error(`Error:`, err);
     return;
 
-  } else if (res.statusCode !== 200){
-    console.error(`Code:`, res.statusCode);
-    return;
-
   } else {
     const films = JSON.parse(body).results;
-    const characterId = '18';
+    let apparition = 0;
 
-    const wedgeMovies = films.filter((film) => film.charaters.includes(`https://swapi-api.hbtn.io/api/films/${characterId}/`));
-
-    console.log(`${wedgeMovies.length}`);
+    for (const film of films) {
+      for (const character of film.characters) {
+        if (character.includes('/18/')) {
+          apparition += 1;
+          break;
+        }
+      }
+    }
+    console.log(apparition);
   }
 });
