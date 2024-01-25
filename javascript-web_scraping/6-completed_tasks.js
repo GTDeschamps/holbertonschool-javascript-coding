@@ -2,6 +2,7 @@
 // write a script that compute the number of task complete by user id
 
 const request = require('request');
+
 const url = process.argv[2];
 
 request.get(url, (err, res, body) => {
@@ -21,7 +22,7 @@ request.get(url, (err, res, body) => {
 
   todos.forEach((task) => {
     if (task.completed) {
-      const {userId} = task;
+      const { userId } = task;
 
       if (!completedTasksByUser[userId]) {
         completedTasksByUser[userId] = 1;
@@ -30,9 +31,9 @@ request.get(url, (err, res, body) => {
       }
     }
   });
-  const result={};
+  const result = {};
   Object.entries(completedTasksByUser).forEach(([userId, completedTasksByUser]) => {
-	result[userId] = completedTasksByUser;
+    result[userId] = completedTasksByUser;
   });
-    console.log(result);
+  console.log(result);
 });

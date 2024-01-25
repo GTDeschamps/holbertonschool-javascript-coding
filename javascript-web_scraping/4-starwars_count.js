@@ -1,15 +1,14 @@
 #!/usr/bin/node
-//write a script to print the number of apparition of Wedge Antille
-//in Star Wars movies.
+// write a script to print the number of apparition of Wedge Antille
+// in Star Wars movies.
 
-const request = require ('request')
+const request = require('request');
+
 const url = process.argv[2];
 
 request(url, (err, res, body) => {
-  if (err){
-    console.error(`Error:`, err);
-    return;
-
+  if (err) {
+    console.error('Error:', err);
   } else {
     const films = JSON.parse(body).results;
     let apparition = 0;

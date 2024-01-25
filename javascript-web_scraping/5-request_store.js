@@ -1,7 +1,7 @@
 #!/usr/bin/node
-//write a script to get contents of webpage and store in file
+// write a script to get contents of webpage and store in file
 
-const request = require ('request')
+const request = require('request');
 const fs = require('fs');
 
 if (process.argv.length !== 4) {
