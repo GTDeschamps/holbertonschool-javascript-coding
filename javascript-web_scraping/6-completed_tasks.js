@@ -1,7 +1,6 @@
 #!/usr/bin/node
 // write a script that compute the number of task complete by user id
 
-
 const request = require('request');
 const url = process.argv[2];
 
