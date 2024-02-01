@@ -1,16 +1,18 @@
-const readline = require('readline');
+function welcome() {
+  process.stdout.write('Welcome to Holberton School, what is your name?\n');
+  process.stdin.setEncoding('utf8');
 
-const r1 = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+  process.stdin.on('data', (input) => {
+    const name = input.toString();
+    process.stdout.write(`Your name is: ${name}`);
 
-console.log('Welcome to Holberton School, what is your name?');
+    process.stdout.write('This important software is now closing\n');
+    process.exit();
+  });
+}
 
-r1.on('line', (name) => {
-  console.log(`Your name is: ${name}`);
-});
+module.exports = welcome;
 
-r1.on('close', () => {
-  console.log('This important software is now closing');
-});
+if (require.main === module) {
+  welcome();
+}
