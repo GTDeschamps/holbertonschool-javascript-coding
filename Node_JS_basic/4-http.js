@@ -2,7 +2,7 @@ const http = require('http');
 
 const app = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'Text/plain' });
-  res.end('Hello Holberton School\n');
+  res.end('Hello Holberton School!\n');
 });
 
 const port = 1245;
