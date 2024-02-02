@@ -11,7 +11,7 @@ app.get('/students', async (req, res) => {
   const databaseName = 'This is the list of our students';
   countStudents(process.argv[2])
     .then((result) => {
-      const out = `${databaseName}\n${result.totalNumber}\n${result.CS}\n${result.SWE}`;
+      const out = `${databaseName}\n${result.TotalStudents}\n${result.CS}\n${result.SWE}`;
       res.type('text/plain').send(out);
     })
     .catch((error) => {
