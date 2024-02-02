@@ -10,7 +10,7 @@ const app = http.createServer((req, res) => {
     res.end();
   }
   if (req.url === '/students') {
-    res.write('This is a list of our students\n');
+    res.write('This is the list of our students\n');
     countStudents(db)
       .then((result) => {
         res.write(`${result.TotalStudents}\n`);
