@@ -3,30 +3,20 @@ const fs = require('fs');
 function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf8');
-    const lines = data.split('\n').filter((line) => line.trim() !== '');
-    const totalStudents = lines.length - 1;
-    const fieldCounts = {};
-
-    lines.forEach((line) => {
+    const totalStudents = data.split('\n').filter(Boolean).slice(1).map((line) => {
       const [firstname, lastname, age, field] = line.split(',');
-      if (field && field.trim() !== '') {
-        if (!fieldCounts[field]) {
-          fieldCounts[field] = [];
-        }
-        fieldCounts[field].push(firstname);
-      }
+      return {
+        firstname, lastname, age, field,
+      };
     });
+    const csStudents = totalStudents.filter((student) => student.field === 'CS');
+    const sweStudents = totalStudents.filter((student) => student.field === 'SWE');
 
-    console.log(`Number of students: ${totalStudents}`);
-
-    for (const field of Object.keys(fieldCounts)) {
-      if (Object.prototype.hasOwnProperty.call(fieldCounts, field)) {
-        const students = fieldCounts[field];
-        console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
-      }
-    }
+    console.log(`Number of students: ${totalStudents.length}`);
+    console.log(`Number of students in CS: ${csStudents.length}. List: ${csStudents.map((student) => student.firstname).join(', ')}`);
+    console.log(`Number of students in SWE: ${sweStudents.length}. List: ${sweStudents.map((student) => student.firstname).join(', ')}`);
   } catch (error) {
-    throw new error(`Cannot load the database: ${error.message}`);
+    throw new Error(`Cannot load the database: ${error.message}`);
   }
 }
 
